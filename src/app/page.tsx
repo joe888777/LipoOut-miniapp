@@ -73,7 +73,7 @@ const Home = () => {
       )}
       {!loading && !videoUrl && (
         <>
-          <h1 className="text-4xl font-bold mb-8">Upload Image and Select Animation</h1>
+          <h1 className="text-4xl font-bold mb-8">Let's Generate Your Special Video</h1>
           <div className="mb-4">
             <h2>Upload your image</h2>
             <input
