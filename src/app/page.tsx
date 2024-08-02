@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
+import { Video } from '@/components/youtube';
 
 const Home = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -64,76 +66,104 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      {loading && (
-        <div className="flex items-center justify-center">
-          <div className="loader"></div>
-          <p>Loading...</p>
-        </div>
-      )}
-      {!loading && !videoUrl && (
-        <>
-          <h1 className="text-4xl font-bold mb-8">Let's Generate Your Special Video</h1>
-          <div className="mb-4">
-            <h2>Upload your image</h2>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="mb-4 border p-2 rounded"
-            />
+    <TonConnectUIProvider manifestUrl="https://0bf2-114-35-55-85.ngrok-free.app/tonconnect-manifest.json">
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <TonConnectButton />
+        {loading && (
+          <div className="flex items-center justify-center">
+            <div className="loader"></div>
+            <p>Loading...</p>
           </div>
-          {previewUrl && (
+        )}
+        {!loading && !videoUrl && (
+          <>
+            <h1 className="text-4xl font-bold mb-8">Let's Generate Your Special Video</h1>
             <div className="mb-4">
-              <img src={previewUrl} alt="Uploaded" className="w-64 h-64 object-cover" />
+              <h2>Upload your image</h2>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="mb-4 border p-2 rounded"
+              />
             </div>
-          )}
-          <div className="mb-4">
-            <h2>Select your video</h2>
-          </div>
-          <div className="flex mb-4">
-            {[1, 2, 3].map((animation) => (
-              <div key={animation} className="flex flex-col items-center mr-4">
-                <video
-                  src={`./${animation}.mp4`}
-                  width="400"
-                  height="200"
-                  controls
-                  className={`border-4 ${selectedAnimation === animation ? 'border-blue-500' : 'border-transparent'}`}
-                  onClick={() => handleAnimationSelect(animation)}
-                />
-                <button
-                  onClick={() => handleAnimationSelect(animation)}
-                  className={`mt-2 px-4 py-2 ${selectedAnimation === animation ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'} rounded`}
-                >
-                  Select Animation {animation}
-                </button>
+            {previewUrl && (
+              <div className="mb-4">
+                <img src={previewUrl} alt="Uploaded" className="w-64 h-64 object-cover" />
               </div>
-            ))}
+            )}
+            <div className="mb-4">
+              <h2>Select your video</h2>
+            </div>
+            <div className="flex mb-4">
+              {[1, 2, 3].map((animation) => (
+                <div key={animation} className="flex flex-col items-center mr-4">
+                  {/* <Video
+                    className={
+                      `border-4 ${
+                        selectedAnimation === animation ?
+                          'border-blue-500' :
+                          'border-transparent'
+                        }
+                      `
+                    }
+                  /> */}
+                  <img
+                    src={`./${animation}.gif`}
+                    alt="ggg"
+                    width="400"
+                    height="200"
+                    className={`border-4 ${selectedAnimation === animation ? 'border-blue-500' : 'border-transparent'}`}
+                  />
+                  <video
+                    src={`./${animation}.mp4`}
+                    width="400"
+                    height="200"
+                    controls
+                    className={`border-4 ${selectedAnimation === animation ? 'border-blue-500' : 'border-transparent'}`}
+                    onClick={() => handleAnimationSelect(animation)}
+                  />
+                  {/* <video
+                    src={`https://purple-improved-woodpecker-816.mypinata.cloud/ipfs/Qmc1zMunx6HoZVwSdXTBDPtXZZ6Xnb4WQM5gF1ZH3Xguqv`}
+                    width="400"
+                    height="200"
+                    controls
+                    className={`border-4 ${selectedAnimation === animation ? 'border-blue-500' : 'border-transparent'}`}
+                    onClick={() => handleAnimationSelect(animation)}
+                  /> */}
+                  <button
+                    onClick={() => handleAnimationSelect(animation)}
+                    className={`mt-2 px-4 py-2 ${selectedAnimation === animation ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'} rounded w-1/3`}
+                  >
+                    Select Animation {animation}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Submit
+            </button>
+          </>
+        )}
+        {videoUrl && (
+          <div className="mt-4">
+            <video controls>
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <button
+              onClick={handleAgain}
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Again
+            </button>
           </div>
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            Submit
-          </button>
-        </>
-      )}
-      {videoUrl && (
-        <div className="mt-4">
-          <video controls>
-            <source src={videoUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <button
-            onClick={handleAgain}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            Again
-          </button>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </TonConnectUIProvider>
   );
 };
 
