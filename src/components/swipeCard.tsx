@@ -1,11 +1,13 @@
-import TinderCard from 'react-tinder-card'
-
+import TinderCard from 'react-tinder-card';
+import circle_icon from '@/assets/circle.svg';
+import cross_icon from '@/assets/cross.svg';
+import Image from 'next/image'
 // ...
 
-export const SwipeCard = () => {
+export const SwipeCard = (props: { videoUrl: string, onSwipe: (direction: any) => void}) => {
     const onSwipe = (direction: any) => {
-        alert('You swiped: ' + direction)
-        console.log('You swiped: ' + direction)
+        console.log(direction);
+        props.onSwipe(direction);
     }
 
     const onCardLeftScreen = (myIdentifier: any) => {
@@ -16,10 +18,23 @@ export const SwipeCard = () => {
     return (
         <TinderCard
             onSwipe={onSwipe}
-            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+            // onCardLeftScreen={(direction) => onSwipe(direction)}
+            preventSwipe={['top', 'down']}
+            swipeThreshold={400}
+
             // preventSwipe={['right', 'left']}
         >
-            Hello, World!
+            <div className='w-[400px] bg-white py-4 px-5 rounded-lg'>
+
+                <video controls className='mb-5 w-full'>
+                    <source src={props.videoUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className="flex justify-between px-5">
+                    <Image src={cross_icon} alt="dislike" width={50} height={50} onClick={() => onSwipe('left')}/>
+                    <Image src={circle_icon} alt="like" width={50} height={50} onClick={() => onSwipe('right')}/>
+                </div>
+            </div>
         </TinderCard>
     )
 }

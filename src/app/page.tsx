@@ -21,6 +21,9 @@ const Home = () => {
   const [step, setStep] = useState<Step>(Step.stepSelectVideo);
   const [animations, setAnimations] = useState<number[]>([1, 2, 3]);
   const [animationIndex, setAnimationIndex] = useState<number>(0);
+  const [otherVideoUrls, setOtherVideoUrls] = useState<string[]>(["1.mp4", "2.mp4", "3.mp4"]);
+  const [swipeCardUrlIndex, setSwipeCardUrlIndex] = useState<number>(0);
+
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -94,6 +97,15 @@ const Home = () => {
     setPreviewUrl(null); // Reset preview URL
   };
 
+  const handleSwipe = (direction: any) => {
+    if (direction === 'right') {
+      alert("You Like this video");
+    } else if (direction === 'left') {
+      alert("You don't like this video");
+    }
+    setSwipeCardUrlIndex((prevIndex) => ((prevIndex + 1) % otherVideoUrls.length));
+  }
+
   return (
     <TonConnectUIProvider
       manifestUrl="https://0bf2-114-35-55-85.ngrok-free.app/tonconnect-manifest.json"
@@ -127,7 +139,7 @@ const Home = () => {
                       />
                       <button
                         onClick={handleIndexChange}
-                        className={`d-flex items-center px-4 py-2  rounded-full text-[#9B9B9B] bg-[#2D2D2D] mb-10`}
+                        className={`d-flex items-center px-4 py-2  rounded-full text-[#9B9B9B] bg-[#2D2D2D] mb-10 mt-3`}
                       >
                         <Image
                           src={change_icon}
@@ -153,57 +165,58 @@ const Home = () => {
                 <h3 className="font-bold mb-8 text-[#8F8E8E]  text-center">
                   Let's be someone you like.
                 </h3>
-                <div className="mb-4">
-                  <h2 className='text-center mb-4 text-white'>
-                    Upload your photo
-                  </h2>
-                  <label htmlFor="file" className='w-full mx-5'>
-                  { !selectedFile &&
-                    <div className='relative'>
+                <div className="flex mb-4 w-[350px]">
+                  <div className="flex flex-col items-center mx-4 w-full">
+                    <h2 className='text-center mb-4 text-white'>
+                      Upload your photo
+                    </h2>
+                    <label htmlFor="file" className=''>
+                    { !selectedFile &&
+                      <div className='relative w-full'>
 
-                      <Image
-                        width="300"
-                        height="300"
-                        src={upload_icon}
-                        className='mx-auto'
-                        alt="upload"
-                        />
-                      <Image
-                        width="50"
-                        height="50"
-                        src={upload_cloud_icon}
-                        className='mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
-                        alt="upload"
-                        />
-                    </div>
-                  }
-                  </label>
-                  <input
-                    type="file"
-                    id="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="mb-4 border p-2 rounded hidden w-[300px] h-[300px]"
-                    />
+                        <Image
+                          width="300"
+                          height="300"
+                          src={upload_icon}
+                          className='mb-10 w-[300px] h-[300px]'
+                          alt="upload"
+                          />
+                        <Image
+                          width="50"
+                          height="50"
+                          src={upload_cloud_icon}
+                          className='mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'
+                          alt="upload"
+                          />
+                      </div>
+                    }
+                    </label>
+                    <input
+                      type="file"
+                      id="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="mb-4 border p-2 rounded hidden w-[300px] h-[300px]"
+                      />
+                    {previewUrl && (
+                      <label htmlFor="file" className='mb-4'>
+                          <img src={previewUrl} alt="Uploaded" className="w-[300px] h-[300px] object-cover mb-10" />
+                      </label>
+                    )}
+                    <button
+                      onClick={handleNext}
+                      className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full"
+                      >
+                      Next
+                    </button>
+                  </div>
                 </div>
-                {previewUrl && (
-                  <label htmlFor="file" className='mb-4'>
-                      <img src={previewUrl} alt="Uploaded" className="w-64 h-64 object-cover" />
-                  </label>
-
-                )}
-                <button
-                  onClick={handleNext}
-                  className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full mx-5"
-                >
-                  Next
-                </button>
               </>
             )}
           </>
         )}
         {videoUrl && step === Step.stepResult && (
-          <div className="mt-4">
+          <div className="mt-4 w-[500px]">
             <h3 className="font-bold mb-8 text-[#8F8E8E] text-center">
               Let's be someone you like.
             </h3>
@@ -211,12 +224,12 @@ const Home = () => {
               <h2 className='text-center mb-4 text-white'>
                 Here's your result
               </h2>
-              <video controls className='mb-5 w-full'>
+              <video controls className='mb-5 w-[350px] h-[350px] mx-auto'>
                 <source src={videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <div className="flex items-center mb-10 justify-between px-5">
-                <span className='text-white block'>If you are Top 3 scoring last week</span>
+                <span className='text-white block mr-3'>If you are Top 3 scoring last week</span>
                 <button className='border-[#FFE958] border-2 px-2 py-2 rounded-full text-[#FFE958] block mx-auto'>
                   Mint Special NFT
                 </button>
@@ -226,7 +239,7 @@ const Home = () => {
               </button>
               <button
                 onClick={handleNext}
-                className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full mx-5"
+                className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full"
               >
                 See other's work
               </button>
@@ -235,7 +248,17 @@ const Home = () => {
         )}
         {step === Step.stepShowOthers && (
           <>
-            <SwipeCard />
+          {otherVideoUrls.length > swipeCardUrlIndex ? (
+            <>
+              <SwipeCard
+                key={swipeCardUrlIndex}
+                videoUrl={otherVideoUrls[swipeCardUrlIndex]}
+                onSwipe={handleSwipe}
+              />
+            </>
+          ) : (
+            <h1>no more videos</h1>
+          )}
           </>
         )}
       </div>
