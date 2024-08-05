@@ -112,7 +112,7 @@ function Advanced () {
                 rel='stylesheet'
                 />
             <div className='cardContainer mx-auto'>
-                {currentIndex > 0 ? (db.map((character, index) => (
+                {currentIndex >= 0 ? (db.map((character, index) => (
                     <TinderCard
                     ref={childRefs[index]}
                     className='swipe'

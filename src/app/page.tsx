@@ -2,8 +2,6 @@
 
 import { useRef, useState } from 'react';
 import { TonConnectUIProvider, TonConnectButton } from '@tonconnect/ui-react';
-import { Video } from '@/components/youtube';
-import { SwipeCard } from '@/components/swipeCard';
 import Image from 'next/image';
 import change_icon from '@/assets/turn.png';
 import upload_icon from '@/assets/video_player.png';
@@ -44,6 +42,7 @@ const Home = () => {
   const [modalShow, setModalShow] = useState<boolean>(true);
   const [showMintFail, setShowMintFail] = useState<boolean>(false);
   const [showMintSuccess, setShowMintSuccess] = useState<boolean>(false);
+
 
   const msleep = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -140,10 +139,26 @@ const Home = () => {
 
   return (
     <TonConnectUIProvider
-      manifestUrl="https://0bf2-114-35-55-85.ngrok-free.app/tonconnect-manifest.json"
+      manifestUrl="https://325e-114-35-55-85.ngrok-free.app/tonconnect-manifest.json"
+      walletsListConfiguration={{
+        includeWallets: [
+            {
+                appName: "telegram-wallet",
+                name: "Wallet",
+                imageUrl: "https://wallet.tg/images/logo-288.png",
+                aboutUrl: "https://wallet.tg/",
+                universalLink: "https://t.me/wallet/start",
+                bridgeUrl: "https://bridge.tonapi.io/bridge",
+                platforms: ["ios", "android", "macos", "windows", "linux"]
+            }
+        ]
+      }}
+      actionsConfiguration={{
+        twaReturnUrl: 'https://t.me/https://t.me/beshinebot/myapp'
+    }}
     >
       <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-black">
-        <TonConnectButton className='hidden' />
+        <TonConnectButton className='my-2' />
         {loading && (
           <div className="flex items-center justify-center">
             <div className="loader"></div>
