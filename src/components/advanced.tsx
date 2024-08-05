@@ -31,15 +31,15 @@ import leader_board_img from '@/assets/leaderBoard.jpg';
 const db = [
   {
     name: '@Jack870731',
-    url: './1.mp4'
+    url: './4.gif'
   },
   {
     name: '@Lily711201',
-    url: './2.mp4'
+    url: './5.gif'
   },
   {
     name: '@Rose851021',
-    url: './3.mp4'
+    url: './6.gif'
   }
 ]
 
@@ -123,10 +123,13 @@ function Advanced () {
                     <div
                     className='card p-4'
                     >
-                        <video controls className='mb-5 w-full' poster={`${character.url.replace('.mp4', '.gif')}`}>
+                        {/* <video controls className='mb-5 w-full' poster={`${character.url.replace('.mp4', '.gif')}`}>
                             <source src={character.url} type="video/mp4" />
                             Your browser does not support the video tag.
-                        </video>
+                        </video> */}
+                        <div className='h-[220px] overflow-hidden'>
+                            <img src={character.url} className='w-full mb-5 w-[220px]' />
+                        </div>
                         <h3 className='text-black'>{character.name}</h3>
                         <div className="flex justify-between px-5">
                             <Image src={cross_icon} alt="dislike" width={50} height={50} onClick={() => onSwipe('left')}/>
