@@ -112,7 +112,7 @@ function Advanced () {
                 rel='stylesheet'
                 />
             <div className='cardContainer mx-auto'>
-                {db.map((character, index) => (
+                {currentIndex > 0 ? (db.map((character, index) => (
                     <TinderCard
                     ref={childRefs[index]}
                     className='swipe'
@@ -133,8 +133,12 @@ function Advanced () {
                             <Image src={circle_icon} alt="like" width={50} height={50} onClick={() => onSwipe('right')}/>
                         </div>
                     </div>
-                </TinderCard>
-                ))}
+                </TinderCard>) 
+                )): (
+                    <div className='w-full h-[300px] flex flex-col justify-center items-center'>
+                        <h3 className='text-white text-center text-2xl block'> No more videos</h3>
+                    </div>
+                )}
             </div>
             <div className='buttons mt-16 justify-between w-full'>
                 <button

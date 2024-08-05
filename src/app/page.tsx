@@ -9,9 +9,26 @@ import change_icon from '@/assets/turn.png';
 import upload_icon from '@/assets/video_player.png';
 import upload_cloud_icon from '@/assets/upload.svg';
 import Advanced from '@/components/advanced';
-
+import mint_fail_img from '@/assets/mint_fail.jpg';
+import mint_success_img from '@/assets/mint_success.jpg';
 
 import { Step } from '@/core/setting';
+
+const MintFail = () => {
+
+  return (
+    <div className=' fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[300px] h-[300px]'>
+      <Image src={mint_fail_img} alt="mint fail" width="300" height="300"/>
+    </div>
+  )
+}
+const MintSuccess = () => {
+  return (
+    <div className=' fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[300px] h-[300px]'>
+      <Image src={mint_success_img} alt="mint fail" width="300" height="300"/>
+    </div>
+  )
+}
 
 const Home = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -24,7 +41,11 @@ const Home = () => {
   const [animationIndex, setAnimationIndex] = useState<number>(0);
   const [otherVideoUrls, setOtherVideoUrls] = useState<string[]>(["1.mp4", "2.mp4", "3.mp4"]);
   const [swipeCardUrlIndex, setSwipeCardUrlIndex] = useState<number>(0);
+  const [modalShow, setModalShow] = useState<boolean>(true);
+  const [showMintFail, setShowMintFail] = useState<boolean>(false);
+  const [showMintSuccess, setShowMintSuccess] = useState<boolean>(false);
 
+  const msleep = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -37,6 +58,16 @@ const Home = () => {
     }
   };
 
+  const handleShowMintFail = async () => {
+    setShowMintFail(true);
+    await msleep(3000);
+    setShowMintFail(false);
+  }
+  const handleShowMintSuccess = async () => {
+    setShowMintSuccess(true);
+    await msleep(3000);
+    setShowMintSuccess(false);
+  }
   const handleAnimationSelect = (animation: number) => {
     setSelectedAnimation(animation);
   };
@@ -228,11 +259,21 @@ const Home = () => {
               </video>
               <div className="flex items-center mb-10 justify-between px-5 flex-wrap w-full">
                 <span className='text-white block mb-5 text-center w-full'>If you are Top 3 scoring last week</span>
-                <button className='border-[#FFE958] border-2 px-2 py-2 rounded-full text-[#FFE958] block mx-auto'>
+                <button
+                  className='border-[#FFE958] border-2 px-2 py-2 rounded-full text-[#FFE958] block mx-auto'
+                  onClick={() => {
+                    handleShowMintFail();
+                  }}
+                >
                   Mint Special NFT
                 </button>
               </div>
-              <button className='border-[#58FFA3] border-2 px-2 py-2 rounded-full text-[#58FFA3] block mx-auto mb-10'>
+              <button
+                className='border-[#58FFA3] border-2 px-2 py-2 rounded-full text-[#58FFA3] block mx-auto mb-10'
+                onClick={() => {
+                  handleShowMintSuccess();;
+                }}
+              >
                 Mint today's NFT
               </button>
               <button
@@ -261,6 +302,8 @@ const Home = () => {
           </>
         )}
       </div>
+      {showMintFail && <MintFail/>}
+      {showMintSuccess && <MintSuccess/>}
     </TonConnectUIProvider>
   );
 };
