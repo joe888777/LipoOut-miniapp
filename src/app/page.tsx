@@ -8,6 +8,7 @@ import Image from 'next/image';
 import change_icon from '@/assets/turn.png';
 import upload_icon from '@/assets/video_player.png';
 import upload_cloud_icon from '@/assets/upload.svg';
+import Advanced from '@/components/advanced';
 
 
 import { Step } from '@/core/setting';
@@ -129,34 +130,31 @@ const Home = () => {
                   <h2 className='text-white'>Today's video</h2>
                 </div>
                 <div className="flex mb-4">
-                    <div className="flex flex-col items-center mx-4">
-                      <img
-                        src={`./${animations[animationIndex]}.gif`}
-                        alt="ggg"
-                        width="300"
-                        height="300"
-                        className={`border-4 border-transparent`}
+                  <div className="flex flex-col items-center mx-4">
+                    <video controls className='mb-5 w-[350px] h-[350px] mx-auto' key={animationIndex} preload='metadata' poster={`${animations[animationIndex]}.gif`}>
+                      <source src={`${animations[animationIndex]}.mp4`} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    <button
+                      onClick={handleIndexChange}
+                      className={`d-flex items-center px-4 py-2  rounded-full text-[#9B9B9B] bg-[#2D2D2D] mb-10 mt-3`}
+                    >
+                      <Image
+                        src={change_icon}
+                        alt="turn"
+                        className='inline-block w-5 h-5 mr-2'
+                        width="30"
+                        height="30"
                       />
-                      <button
-                        onClick={handleIndexChange}
-                        className={`d-flex items-center px-4 py-2  rounded-full text-[#9B9B9B] bg-[#2D2D2D] mb-10 mt-3`}
-                      >
-                        <Image
-                          src={change_icon}
-                          alt="turn"
-                          className='inline-block w-5 h-5 mr-2'
-                          width="30"
-                          height="30"
-                        />
-                        change
-                      </button>
-                      <button
-                        onClick={handleNext}
-                        className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full mx-5"
-                      >
-                        Next
-                      </button>
-                    </div>
+                      change
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="px-4 py-2 bg-[#58FFA3] text-black rounded-xl w-full mx-5"
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
               </>
             )}
@@ -216,7 +214,7 @@ const Home = () => {
           </>
         )}
         {videoUrl && step === Step.stepResult && (
-          <div className="mt-4 w-[500px]">
+          <div className="mt-4 w-[400px]">
             <h3 className="font-bold mb-8 text-[#8F8E8E] text-center">
               Let's be someone you like.
             </h3>
@@ -228,8 +226,8 @@ const Home = () => {
                 <source src={videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-              <div className="flex items-center mb-10 justify-between px-5">
-                <span className='text-white block mr-3'>If you are Top 3 scoring last week</span>
+              <div className="flex items-center mb-10 justify-between px-5 flex-wrap w-full">
+                <span className='text-white block mb-5 text-center w-full'>If you are Top 3 scoring last week</span>
                 <button className='border-[#FFE958] border-2 px-2 py-2 rounded-full text-[#FFE958] block mx-auto'>
                   Mint Special NFT
                 </button>
@@ -249,13 +247,14 @@ const Home = () => {
         {step === Step.stepShowOthers && (
           <>
           {otherVideoUrls.length > swipeCardUrlIndex ? (
-            <>
-              <SwipeCard
-                key={swipeCardUrlIndex}
-                videoUrl={otherVideoUrls[swipeCardUrlIndex]}
-                onSwipe={handleSwipe}
-              />
-            </>
+            // <>
+            //   <SwipeCard
+            //     key={swipeCardUrlIndex}
+            //     videoUrl={otherVideoUrls[swipeCardUrlIndex]}
+            //     onSwipe={handleSwipe}
+            //   />
+            // </>
+            <Advanced/>
           ) : (
             <h1>no more videos</h1>
           )}
