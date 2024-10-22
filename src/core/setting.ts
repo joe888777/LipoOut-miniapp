@@ -8,7 +8,8 @@ export enum Step {
 export enum Pages {
     DashBoard = "dashboard",
     Profile = "profile",
-    Record = "record",
+    Workout = "workout",
+    DailyNutritions = "daily_nutritions",
     Register = "register",
     UploadImage = "upload_image"
 }

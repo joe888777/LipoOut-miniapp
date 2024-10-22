@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import Navigator from "@/components/navigator";
-import { NavigationEvents } from "@/components/navigation-events";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +18,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navigator/>
-        <Suspense fallback={null}>
-          <NavigationEvents/>
-        </Suspense>
+      <body className={`${inter.className}`}>
 
-        {children}
+        <div className="container mx-auto">
+          <div
+            className="w-full px-5"
+            style={{height: "calc(100vh - 80px)"}}
+          >
+            {children}
+          </div>
+          <Navigator/>
+        </div>
       </body>
     </html>
   );

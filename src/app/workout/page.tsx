@@ -1,11 +1,11 @@
 import React from "react";
 
-const Record = () => {
+const Workout = () => {
     return (
         <div>
-            <h1>Record</h1>
+            <h1>Workout</h1>
         </div>
     )
 }
 
-export default Record;
+export default Workout;
