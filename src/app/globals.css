@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
 
@@ -18,12 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -32,40 +27,13 @@ body {
   }
 }
 
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid blue;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-#root {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  /* background: linear-gradient(#fff, #999); */
-  background: linear-gradient(#e66465, #9198e5);
-}
-
 * {
   user-select: none;
-}
-
-#root>div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .app {
@@ -88,95 +56,35 @@ body {
 }
 
 h1 {
-  font-family: 'Damion', cursive;
-  color: #fff;
-  text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+  color: var(--Gray-700, #333);
+  font-family: "SF Pro";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.72px;
 }
 
-h2 {
-  color: #fff;
+p {
+  color: var(--Gray-700, #333);
 }
 
-.swipe {
-  position: absolute;
+::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
 }
 
-.cardContainer {
-  width: 90vw;
-  max-width: 260px;
-  height: 300px;
+/* Optional: If you want to hide the scrollbar but still allow scrolling */
+.scrollable {
+  overflow: scroll; /* Allow scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
-
-.card {
-  position: relative;
-  background-color: #fff;
-  width: 80vw;
-  max-width: 260px;
-  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
-  border-radius: 20px;
-  background-size: cover;
-  background-position: center;
+.slick-track{
+  /* position: relative; */
 }
-
-.cardContent {
-  width: 100%;
-  height: 100%;
-}
-
-.swipe:last-of-type {
+.slick-track::before {
 
 }
-
-.infoText {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  color: #fff;
-  animation-name: popup;
-  animation-duration: 800ms;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  /* flex-wrap: wrap; */
-}
-
-.buttons button {
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 18px;
-  background-color: #9198e5;
-  transition: 200ms;
-  margin: 5px;
-  font-weight: bolder;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
-}
-
-.seelastweekbutton {
-  flex-shrink: 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 18px;
-  background-color: #9198e5;
-  transition: 200ms;
-  font-weight: bolder;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
-}
-
-.buttons button:hover {
-  transform: scale(1.05);
-}
-
-@keyframes popup {
-  0%   { transform: scale(1,1) }
-  10%  { transform: scale(1.1,1.1) }
-  30%  { transform: scale(.9,.9) }
-  50%  { transform: scale(1,1) }
-  57%  { transform: scale(1,1) }
-  64%  { transform: scale(1,1) }
-  100% { transform: scale(1,1) }
+.slick-track::after {
+  
 }
