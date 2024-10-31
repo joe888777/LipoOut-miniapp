@@ -1,0 +1,9 @@
+.btn-main {
+    border-radius: 16px;
+    background: linear-gradient(274deg, #4B6DAA 0%, #86B0D4 124.45%);
+    box-shadow: 0px 10px 22px 0px rgba(134, 176, 212, 0.30);
+}
+
+.slick-slide > div > div {
+    background: var(--Linear-100, linear-gradient(274deg, #4B6DAA 0%, #86B0D4 124.45%));;
+}

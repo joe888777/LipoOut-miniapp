@@ -9,12 +9,22 @@ const config: Config = {
     flowbite.content()
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      extend: {
+        colors: {
+          // Define your custom colors for light and dark modes
+          primary: {
+            DEFAULT: 'var(--Linear-100, linear-gradient(274deg, #4B6DAA 0%, #86B0D4 124.45%))', // Light mode primary color
+            dark: '#3B82F6', // Dark mode primary color
+          },
+          background: {
+            DEFAULT: '#FFFFFF', // Light mode background
+            dark: '#1F2937', // Dark mode background
+          },
+          text: {
+            DEFAULT: '#000000', // Light mode text color
+            dark: '#FFFFFF', // Dark mode text color
+          },
+        },
     },
   },
   plugins: [
