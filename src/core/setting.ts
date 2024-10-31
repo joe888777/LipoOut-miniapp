@@ -1,3 +1,5 @@
+export const API_URL = "https://localhost:8000";
+
 export enum Step {
     Register = 1,
     Dashboard = 2,
