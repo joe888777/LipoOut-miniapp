@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
-import Navigator from "@/components/navigator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +23,13 @@ export default function RootLayout({
           <div
             className="w-full px-5"
           >
-            {children}
+            <Suspense fallback={(
+              <div>
+                Loading...
+              </div>
+            )}>
+              {children}
+            </Suspense>
           </div>
         </div>
       </body>

@@ -7,17 +7,22 @@ import { useState, useEffect } from "react";
 
 // Import images
 import circleChart from '../assets/images/circle_chart.svg';
-import fitness from '../assets/images/fitness.png';
+// import fitness from '../assets/images/fitness.png';
 import fork from '../assets/images/fork.svg';
 import profile from '../assets/images/profile.svg';
-import add from '../assets/images/add.png';
+// import add from '../assets/images/add.png';
 import "../style/components.scss";
 
 function Navigator() {
     const router = useRouter();
     
     const getRoute = () => {
-      const group = location.href.split("/");
+      let group;
+      if (typeof window !== "undefined") {
+        group = window?.location?.href.split("/");
+      } else {
+        group = [""];
+      }
       return group[group.length -1];
     }
     const [activePage, setActivePage] = useState<string>(getRoute());
@@ -29,7 +34,9 @@ function Navigator() {
 
     // Update active page based on the current route
     useEffect(() => {
+      if (typeof window !== "undefined") {
         setActivePage(window.location.pathname);
+      }
     }, []);
 
   
