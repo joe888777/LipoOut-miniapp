@@ -9,6 +9,10 @@ import losefat from '../../assets/images/losefat.png';
 import athletic from '../../assets/images/athletic.png';
 import congrats from '../../assets/images/congrats.svg';
 import burger from '../../assets/images/burger.png';
+import card1 from '../../assets/images/Card 1.png';
+import card2 from '../../assets/images/Card 2.png';
+import card3 from '../../assets/images/Card 3.png';
+
 
 import '../../style/components.scss';
 import WheelPicker from 'react-simple-wheel-picker';
@@ -332,19 +336,19 @@ const ChooseGoal = (props: {setState: Function}) => {
           title: 'Lose Fat',
           description1: 'I need to lose more than 10 kilograms.',
           description2: 'My goal is to shed the fat and build muscle.',
-          img: losefat,
+          img: card1,
         },
         {
           title: 'Lean and Fit',
           description1: 'I\'m slim but lack muscle definition.',
           description2: 'I want to build lean muscle properly.',
-          img: male,
+          img: card2,
         },
         {
           title: 'Athletic',
           description1: 'My body fat is low, and I want to focus on gaining more muscle.',
           description2: '',
-          img: athletic,
+          img: card3,
         },
       ];
     
@@ -368,9 +372,9 @@ const ChooseGoal = (props: {setState: Function}) => {
                 {options.map((option, index) => (
                     <div
                         key={index}
-                        className="p-4 items-center bg- bg-primary rounded-2xl mx-2"
+                        className="p-4 rounded-2xl mx-2"
                     >
-                        <div className="w-[117px] h-[130px] mx-auto">
+                        {/* <div className="w-[117px] h-[130px] mx-auto">
 
                             <Image
                                 src={option.img}
@@ -381,7 +385,15 @@ const ChooseGoal = (props: {setState: Function}) => {
                         <h2 className="text-2xl font-bold mb-2 text-center text-black">{option.title}</h2>
 
                         <p className="text-center text-white text-sm">{option.description1}</p>
-                        <p className="text-center text-white text-sm">{option.description2}</p>
+                        <p className="text-center text-white text-sm">{option.description2}</p> */}
+                        <Image
+                            src={option.img}
+                            fill={false}
+                            width={260}
+                            height={360}
+                            alt="goal"
+                            className="mx-auto"
+                        />
                     </div>
                 ))}
             </Slider>

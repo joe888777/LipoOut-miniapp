@@ -23,11 +23,9 @@ export default function RootLayout({
         <div className="container mx-auto">
           <div
             className="w-full px-5"
-            style={{height: "calc(100vh - 80px)"}}
           >
             {children}
           </div>
-          <Navigator/>
         </div>
       </body>
     </html>
